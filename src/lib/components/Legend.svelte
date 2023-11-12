@@ -1,11 +1,19 @@
 <script lang="ts">
+	import navigationStore from '$stores/navigation';
+
 	const legend = ['YOUR INFO', 'SELECT PLAN', 'ADD-ONS', 'SUMMARY'];
 </script>
 
 <div class="wrapper">
 	{#each legend as title, index}
 		<div class="container">
-			<div class="number-indicator">{index + 1}</div>
+			<div
+				class="number-indicator"
+				class:active-step={index + 1 ===
+					($navigationStore === 5 ? $navigationStore - 1 : $navigationStore)}
+			>
+				{index + 1}
+			</div>
 			<div class="section">
 				<h3>STEP {index + 1}</h3>
 				<p>{title}</p>
@@ -49,6 +57,11 @@
 		p {
 			margin: 0;
 		}
+	}
+
+	.active-step {
+		background-color: var(--color-primary-light-blue);
+		color: black;
 	}
 
 	.section {
