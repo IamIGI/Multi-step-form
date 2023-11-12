@@ -2,6 +2,7 @@
 
 :root {
 	--color-primary-marine-blue: hsl(213, 96%, 18%);
+	--color-primary-marine-blue-hover: hsl(213, 93%, 28%);
 	--color-primary-purplish-blue: hsl(243, 100%, 62%);
 	--color-primary-pastel-blue: hsl(228, 100%, 84%);
 	--color-primary-light-blue: hsl(206, 94%, 87%);
@@ -14,8 +15,6 @@
 	--color-neutral-white: hsl(0, 0%, 100%);
 
 	--font-size-p: 16px;
-
-	--border-radius-general: 10px;
 }
 
 body {
