@@ -19,6 +19,7 @@
 <style lang="scss">
 	section {
 		text-align: left;
+		margin-bottom: 0px;
 		h1 {
 			margin: 0;
 			margin-bottom: 10px;

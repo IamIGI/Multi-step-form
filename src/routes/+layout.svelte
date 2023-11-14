@@ -4,7 +4,14 @@
 	import favicon from '$assets/images/favicon-32x32.png';
 	import Legend from '$components/Legend.svelte';
 	import navigationStore from '$stores/navigation';
+	import formDataStore from '$stores/formData';
 	import StepDescription from '$components/StepDescription.svelte';
+
+	const navigateNext = () => {
+		console.log('navigateNext');
+		navigationStore.goNext();
+		formDataStore.triggerPersonalInfoSave();
+	};
 </script>
 
 <svelte:head>
@@ -23,7 +30,7 @@
 					<button class="back-button" on:click={navigationStore.goBack}> Go Back </button>
 				{/if}
 				{#if $navigationStore !== 4}
-					<button class="next-button" on:click={navigationStore.goNext}> Next Step </button>
+					<button class="next-button" on:click={navigateNext}> Next Step </button>
 				{:else}
 					<button type="submit" class="confirm-button" on:click={navigationStore.goNext}>
 						Confirm
@@ -36,6 +43,7 @@
 
 <style lang="scss">
 	.general-wrapper {
+		height: 100%;
 		border-radius: var(--border-radius-general);
 		padding: 15px;
 		display: flex;
@@ -47,13 +55,14 @@
 	}
 
 	.step-container {
+		height: 566px;
 		width: 600px;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-start;
+		justify-content: space-between;
 		align-items: flex-start;
 		gap: 20px;
-		padding: 3% 7%;
+		padding: 4% 7% 2% 7%;
 
 		.buttons-wrapper {
 			display: flex;
@@ -68,7 +77,7 @@
 
 			.next-button {
 				order: -1;
-				padding: 13px;
+				padding: 13px 15px;
 				background-color: var(--color-primary-marine-blue);
 				font-size: 14px;
 				color: var(--color-neutral-white);
