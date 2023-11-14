@@ -4,6 +4,7 @@
 	import favicon from '$assets/images/favicon-32x32.png';
 	import Legend from '$components/Legend.svelte';
 	import navigationStore from '$stores/navigation';
+	import StepDescription from '$components/StepDescription.svelte';
 </script>
 
 <svelte:head>
@@ -14,10 +15,21 @@
 <div class="general-wrapper">
 	<Legend />
 	<div class="step-container">
+		<StepDescription />
 		<slot />
 		<div class="buttons-wrapper">
-			<button class="back-button" on:click={navigationStore.goBack}> Go Back </button>
-			<button class="next-button" on:click={navigationStore.goNext}> Next Step </button>
+			{#if $navigationStore !== 5}
+				{#if $navigationStore !== 1}
+					<button class="back-button" on:click={navigationStore.goBack}> Go Back </button>
+				{/if}
+				{#if $navigationStore !== 4}
+					<button class="next-button" on:click={navigationStore.goNext}> Next Step </button>
+				{:else}
+					<button type="submit" class="confirm-button" on:click={navigationStore.goNext}>
+						Confirm
+					</button>
+				{/if}
+			{/if}
 		</div>
 	</div>
 </div>
@@ -29,7 +41,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
 		gap: 10px;
 		background-color: var(--color-neutral-white);
 	}
@@ -41,10 +53,11 @@
 		justify-content: flex-start;
 		align-items: flex-start;
 		gap: 20px;
-		padding: 7% 12%;
+		padding: 3% 7%;
 
 		.buttons-wrapper {
 			display: flex;
+			flex-direction: row-reverse;
 			justify-content: space-between;
 			width: 100%;
 			align-items: center;
@@ -54,6 +67,7 @@
 			}
 
 			.next-button {
+				order: -1;
 				padding: 13px;
 				background-color: var(--color-primary-marine-blue);
 				font-size: 14px;
@@ -63,6 +77,20 @@
 
 				&:hover {
 					background-color: hsl(213, 93%, 28%);
+				}
+			}
+
+			.confirm-button {
+				order: -1;
+				padding: 13px;
+				background-color: var(--color-primary-purplish-blue);
+				font-size: 14px;
+				color: var(--color-neutral-white);
+				border-radius: 8px;
+				border: none;
+
+				&:hover {
+					background-color: hsl(243, 98%, 67%);
 				}
 			}
 
