@@ -1,24 +1,24 @@
 import { writable } from 'svelte/store';
 
-type PersonalInfo = {
-	name: string;
-	email: string;
-	phone_number: number;
-};
+export interface PersonalInfo {
+	name: string | null;
+	email: string | null;
+	phone_number: string | null;
+}
 
-type FormData = {
+export interface FormData {
 	trigger?: {
 		personalInfo: boolean;
 	};
 	form: {
 		personalInfo: PersonalInfo;
 	};
-};
+}
 
 const formDataStore = () => {
 	const { subscribe, update } = writable<FormData>({
 		trigger: { personalInfo: false },
-		form: { personalInfo: { name: '', email: '', phone_number: 0 } }
+		form: { personalInfo: { name: '', email: '', phone_number: '' } }
 	});
 
 	const triggerPersonalInfoSave = () => {

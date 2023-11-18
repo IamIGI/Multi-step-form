@@ -1,9 +1,14 @@
 <script lang="ts">
 	import formDataStore from '$stores/formData';
+	import { get } from 'svelte/store';
+	import { onMount } from 'svelte';
+	import type { PersonalInfo } from '$stores/formData';
 
-	let nameValue: string;
-	let emailValue: string;
-	let phoneValue: number;
+	let nameValue: string = '';
+	let emailValue: string = '';
+	let phoneValue: string = '';
+
+	$: phoneValue = phoneValue.replace(/[^0-9]/g, '');
 
 	formDataStore.subscribe((curr) => {
 		if (curr.trigger?.personalInfo) {
@@ -13,6 +18,19 @@
 				phone_number: phoneValue
 			});
 		}
+	});
+
+	function getPersonalInfo(): PersonalInfo {
+		const formData = get(formDataStore);
+		return formData.form.personalInfo;
+	}
+
+	onMount(() => {
+		const personalInfo = getPersonalInfo();
+
+		nameValue = personalInfo.name ?? '';
+		emailValue = personalInfo.email ?? '';
+		phoneValue = personalInfo.phone_number ?? '';
 	});
 </script>
 
