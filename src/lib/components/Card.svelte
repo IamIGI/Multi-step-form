@@ -1,14 +1,28 @@
 <script lang="ts">
+	import formDataStore, { type period, type plan } from '$stores/formData';
+
 	export let icon: string;
-	export let title: string;
+	export let title: plan;
 	export let cost: number;
+	export let active: boolean;
+	export let period: period;
 </script>
 
-<div class="wrapper">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-interactive-supports-focus -->
+<div
+	role="button"
+	class="wrapper"
+	class:isActive={active}
+	on:click={() => formDataStore.changePlanType(title)}
+>
 	<img class="icon" alt="icon" src={icon} />
 	<section>
 		<h2>{title}</h2>
-		<p>${cost}/mo</p>
+		<p>${period === 'year' ? cost * 10 : cost}/mo</p>
+		{#if period === 'year'}
+			<p class="year_paragraph">2 months free</p>
+		{/if}
 	</section>
 </div>
 
@@ -26,7 +40,7 @@
 		cursor: pointer;
 
 		&:hover {
-			border: 1px solid var(--color-primary-purplish-blue);
+			border: 2px solid var(--color-primary-purplish-blue);
 			background-color: var(--color-neutral-alabaster);
 		}
 
@@ -40,6 +54,7 @@
 				font-weight: 700;
 				font-size: 20px;
 				margin: 0px;
+				color: var(--color-primary-marine-blue);
 			}
 
 			p {
@@ -48,6 +63,15 @@
 				margin: 0px;
 				color: var(--color-neutral-cool-gray);
 			}
+
+			.year_paragraph {
+				color: var(--color-primary-marine-blue);
+			}
 		}
+	}
+
+	.isActive {
+		border: 2px solid var(--color-primary-purplish-blue);
+		background-color: var(--color-neutral-alabaster);
 	}
 </style>

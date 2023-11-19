@@ -1,9 +1,24 @@
 <script lang="ts">
+	import formDataStore from '$stores/formData';
+	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
+
+	let value: boolean = false;
+
+	onMount(() => {
+		const formData = get(formDataStore);
+		const period = formData.form.plan.period;
+		value = period === 'year';
+	});
+
+	const updatePeriod = () => {
+		formDataStore.changePlanPeriod(value ? 'year' : 'month');
+	};
 </script>
 
 <!-- Rounded switch -->
 <label class="switch">
-	<input type="checkbox" />
+	<input type="checkbox" bind:checked={value} on:change={updatePeriod} />
 	<span class="slider round" />
 </label>
 
