@@ -4,8 +4,15 @@
 	import icon_pro from '$assets/images/icon-pro.svg';
 	import Card from './Card.svelte';
 	import Switcher from './Switcher.svelte';
+	import formDataStore, { type plan } from '$stores/formData';
 
-	const cards = [
+	interface Card {
+		icon: string;
+		title: plan;
+		cost: number;
+	}
+
+	const cards: Card[] = [
 		{
 			icon: icon_arcade,
 			title: 'Arcade',
@@ -27,7 +34,13 @@
 <div class="wrapper">
 	<main>
 		{#each cards as card}
-			<Card icon={card.icon} title={card.title} cost={card.cost} />
+			<Card
+				icon={card.icon}
+				title={card.title}
+				cost={card.cost}
+				active={card.title === $formDataStore.form.plan.type}
+				period={$formDataStore.form.plan.period}
+			/>
 		{/each}
 	</main>
 	<section>

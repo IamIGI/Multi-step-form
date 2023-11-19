@@ -6,19 +6,26 @@ export interface PersonalInfo {
 	phone_number: string | null;
 }
 
+export type plan = 'Arcade' | 'Pro' | 'Advanced' | null;
+export type period = 'month' | 'year';
+
 export interface FormData {
 	trigger?: {
 		personalInfo: boolean;
 	};
 	form: {
 		personalInfo: PersonalInfo;
+		plan: { type: plan; period: period };
 	};
 }
 
 const formDataStore = () => {
 	const { subscribe, update } = writable<FormData>({
 		trigger: { personalInfo: false },
-		form: { personalInfo: { name: '', email: '', phone_number: '' } }
+		form: {
+			personalInfo: { name: '', email: '', phone_number: '' },
+			plan: { type: null, period: 'year' }
+		}
 	});
 
 	const triggerPersonalInfoSave = () => {
@@ -36,10 +43,30 @@ const formDataStore = () => {
 		});
 	};
 
+	const changePlanType = (value: plan) => {
+		update((prev) => {
+			return {
+				...prev,
+				form: { ...prev.form, plan: { ...prev.form.plan, type: value } }
+			};
+		});
+	};
+
+	const changePlanPeriod = (value: period) => {
+		update((prev) => {
+			return {
+				...prev,
+				form: { ...prev.form, plan: { ...prev.form.plan, period: value } }
+			};
+		});
+	};
+
 	return {
 		subscribe,
 		triggerPersonalInfoSave,
-		updatePersonalInfo
+		updatePersonalInfo,
+		changePlanType,
+		changePlanPeriod
 	};
 };
 

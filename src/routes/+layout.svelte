@@ -8,7 +8,6 @@
 	import StepDescription from '$components/StepDescription.svelte';
 
 	const navigateNext = () => {
-		console.log('navigateNext');
 		navigationStore.goNext();
 		formDataStore.triggerPersonalInfoSave();
 	};
