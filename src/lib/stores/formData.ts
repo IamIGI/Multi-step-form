@@ -1,5 +1,7 @@
 import { writable } from 'svelte/store';
 
+export type addOnsTitles = 'Online service' | 'Larger storage' | 'Customizable Profile';
+export type addOnsTypes = 'onlineService' | 'largerStorage' | 'customizableProfile';
 export interface PersonalInfo {
 	name: string | null;
 	email: string | null;
@@ -16,6 +18,7 @@ export interface FormData {
 	form: {
 		personalInfo: PersonalInfo;
 		plan: { type: plan; period: period };
+		addOns: { onlineService: boolean; largerStorage: boolean; customizableProfile: boolean };
 	};
 }
 
@@ -24,7 +27,8 @@ const formDataStore = () => {
 		trigger: { personalInfo: false },
 		form: {
 			personalInfo: { name: '', email: '', phone_number: '' },
-			plan: { type: null, period: 'year' }
+			plan: { type: null, period: 'year' },
+			addOns: { onlineService: false, largerStorage: false, customizableProfile: false }
 		}
 	});
 
@@ -61,12 +65,37 @@ const formDataStore = () => {
 		});
 	};
 
+	const getAdd = (value: addOnsTitles): addOnsTypes => {
+		switch (value) {
+			case 'Online service':
+				return 'onlineService';
+			case 'Larger storage':
+				return 'largerStorage';
+			case 'Customizable Profile':
+				return 'customizableProfile';
+			default:
+				return 'onlineService';
+		}
+	};
+
+	const changeAddOns = (key: addOnsTitles, value: boolean) => {
+		update((prev) => {
+			console.log(getAdd(key), value);
+			return {
+				...prev,
+				form: { ...prev.form, addOns: { ...prev.form.addOns, [getAdd(key)]: value } }
+			};
+		});
+	};
+
 	return {
 		subscribe,
 		triggerPersonalInfoSave,
 		updatePersonalInfo,
 		changePlanType,
-		changePlanPeriod
+		changePlanPeriod,
+		changeAddOns,
+		getAdd
 	};
 };
 
