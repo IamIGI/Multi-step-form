@@ -6,6 +6,7 @@
 	import navigationStore from '$stores/navigation';
 	import formDataStore from '$stores/formData';
 	import StepDescription from '$components/StepDescription.svelte';
+	import { formIsNotFinish } from '$stores/formIsFinish';
 
 	const navigateNext = () => {
 		navigationStore.goNext();
@@ -29,7 +30,9 @@
 					<button class="back-button" on:click={navigationStore.goBack}> Go Back </button>
 				{/if}
 				{#if $navigationStore !== 4}
-					<button class="next-button" on:click={navigateNext}> Next Step </button>
+					<button class="next-button" on:click={navigateNext} disabled={$formIsNotFinish}>
+						Next Step
+					</button>
 				{:else}
 					<button type="submit" class="confirm-button" on:click={navigationStore.goNext}>
 						Confirm
@@ -82,6 +85,15 @@
 				color: var(--color-neutral-white);
 				border-radius: 8px;
 				border: none;
+
+				&:disabled {
+					background-color: gray;
+					cursor: auto;
+
+					&:hover {
+						background-color: gray;
+					}
+				}
 
 				&:hover {
 					background-color: hsl(213, 93%, 28%);

@@ -1,34 +1,8 @@
 <script lang="ts">
-	import icon_advanced from '$assets/images/icon-advanced.svg';
-	import icon_arcade from '$assets/images/icon-arcade.svg';
-	import icon_pro from '$assets/images/icon-pro.svg';
 	import Card from './Card.svelte';
 	import Switcher from './Switcher.svelte';
 	import formDataStore, { type plan } from '$stores/formData';
-
-	interface Card {
-		icon: string;
-		title: plan;
-		cost: number;
-	}
-
-	const cards: Card[] = [
-		{
-			icon: icon_arcade,
-			title: 'Arcade',
-			cost: 9
-		},
-		{
-			icon: icon_advanced,
-			title: 'Advanced',
-			cost: 12
-		},
-		{
-			icon: icon_pro,
-			title: 'Pro',
-			cost: 15
-		}
-	];
+	import { cards } from '../../data/data';
 </script>
 
 <div class="wrapper">

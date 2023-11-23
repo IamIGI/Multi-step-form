@@ -80,7 +80,6 @@ const formDataStore = () => {
 
 	const changeAddOns = (key: addOnsTitles, value: boolean) => {
 		update((prev) => {
-			console.log(getAdd(key), value);
 			return {
 				...prev,
 				form: { ...prev.form, addOns: { ...prev.form.addOns, [getAdd(key)]: value } }
