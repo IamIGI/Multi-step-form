@@ -1,13 +1,23 @@
 <script lang="ts">
 	import navigationStore from '$stores/navigation';
+	import formDataStore from '$stores/formData';
 
 	const legend = ['YOUR INFO', 'SELECT PLAN', 'ADD-ONS', 'SUMMARY'];
+
+	const navigate = (index: number) => {
+		if (index === 1) formDataStore.triggerPersonalInfoSave();
+		index !== 4 && navigationStore.goTo(index);
+	};
 </script>
 
 <div class="wrapper">
 	{#each legend as title, index}
 		<div class="container">
+			<!-- svelte-ignore a11y-interactive-supports-focus -->
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div
+				role="button"
+				on:click={() => navigate(index + 1)}
 				class="number-indicator"
 				class:active-step={index + 1 ===
 					($navigationStore === 5 ? $navigationStore - 1 : $navigationStore)}
@@ -53,6 +63,10 @@
 		align-items: center;
 		border: 1px solid var(--color-neutral-white);
 		color: white;
+
+		&:hover {
+			cursor: pointer;
+		}
 
 		p {
 			margin: 0;
