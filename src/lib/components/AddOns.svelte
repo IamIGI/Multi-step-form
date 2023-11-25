@@ -73,6 +73,16 @@
 				font-size: var(--font-size-p);
 				color: var(--color-neutral-cool-gray);
 			}
+
+			@media screen and (max-width: 700px) {
+				h2 {
+					font-size: 18px;
+				}
+
+				p {
+					font-size: calc(var(--font-size-p) - 3px);
+				}
+			}
 		}
 
 		&:hover {

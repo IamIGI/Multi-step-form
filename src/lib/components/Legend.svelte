@@ -43,6 +43,15 @@
 		justify-content: flex-start;
 		align-items: flex-start;
 		gap: 25px;
+
+		@media screen and (max-width: 700px) {
+			background-image: url('$assets/images/bg-sidebar-mobile.svg');
+			width: 375px;
+			height: 172px;
+			flex-direction: row;
+			justify-content: center;
+			align-items: flex-start;
+		}
 	}
 
 	.container {
@@ -96,6 +105,10 @@
 			font-weight: 700;
 			color: var(--color-neutral-white);
 			font-size: 15px;
+		}
+
+		@media screen and (max-width: 700px) {
+			display: none;
 		}
 	}
 </style>

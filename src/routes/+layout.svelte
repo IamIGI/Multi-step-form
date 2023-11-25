@@ -54,6 +54,12 @@
 		align-items: flex-start;
 		gap: 10px;
 		background-color: var(--color-neutral-white);
+
+		@media screen and (max-width: 700px) {
+			background-color: transparent;
+			flex-direction: column;
+			gap: 0px;
+		}
 	}
 
 	.step-container {
@@ -127,6 +133,19 @@
 					color: black;
 				}
 			}
+		}
+
+		@media screen and (max-width: 900px) {
+			width: 350px;
+			padding: 4% 3% 2% 3%;
+		}
+
+		@media screen and (max-width: 700px) {
+			background-color: var(--color-neutral-white);
+			border-radius: 15px;
+			position: absolute;
+			top: 130px;
+			margin-left: 10px;
 		}
 	}
 </style>

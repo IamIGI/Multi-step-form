@@ -68,6 +68,37 @@
 				color: var(--color-primary-marine-blue);
 			}
 		}
+
+		@media screen and (max-width: 900px) {
+			width: 100px;
+			padding: 20px 10px 20px 10px;
+			text-align: left;
+
+			img {
+				width: 30px;
+				height: 30px;
+			}
+
+			section {
+				h2 {
+					font-weight: 700;
+					font-size: 16px;
+					margin: 0px;
+					color: var(--color-primary-marine-blue);
+				}
+
+				p {
+					font-size: calc(var(--font-size-p) - 3px);
+					font-weight: 500;
+					margin: 0px;
+					color: var(--color-neutral-cool-gray);
+				}
+
+				.year_paragraph {
+					color: var(--color-primary-marine-blue);
+				}
+			}
+		}
 	}
 
 	.isActive {
