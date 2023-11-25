@@ -28,4 +28,9 @@ body {
 	text-align: center;
 	min-height: 100vh;
 	background-color: var(--color-neutral-magnolia);
+
+	@media screen and (max-width: 700px) {
+		justify-content: flex-start;
+		align-items: center;
+	}
 }
